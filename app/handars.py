@@ -1,6 +1,5 @@
 from aiogram.dispatcher import FSMContext
 
-
 from app.config import dp, bot
 from aiogram import types
 import app.database.db as db
@@ -46,9 +45,10 @@ async def process_my_orders(message: types.Message):
 @dp.message_handler(regexp="Sgushonkali")
 async def process_im(message: types.Message):
     rasm = open("app/images/sugushonka.JPEG", "rb")
-    await bot.send_photo(message.chat.id, rasm, "Saqlash muddati 20 kun,\n" 
+    await bot.send_photo(message.chat.id, rasm, "Saqlash muddati 20 kun,\n"
                                                 "Tarkibi: Qatiq, shakar, o'simlik moyi,\n"
-                                                "Osh sodasi, vanilin, un, Sugushonka", reply_markup=kb.keyboards_product)
+                                                "Osh sodasi, vanilin, un, Sugushonka",
+                         reply_markup=kb.keyboards_product)
 
 
 @dp.message_handler(regexp="Kakaoli kakos")
@@ -56,9 +56,8 @@ async def process_im(message: types.Message):
     rasm = open("app/images/kakaoli_kakos.JPEG", "rb")
     await bot.send_photo(message.chat.id, rasm, "Saqlash muddati 20 kun.\n"
                                                 "Tarkibi: Qatiq, shakar, o'simlik moyi,\n"
-                                                "Osh sodasi, vanilin, un, kakao, kakos ", reply_markup=kb.keyboards_product)
-
-
+                                                "Osh sodasi, vanilin, un, kakao, kakos ",
+                         reply_markup=kb.keyboards_product)
 
 
 @dp.message_handler(regexp="Kakosli")
@@ -92,6 +91,7 @@ async def process_im(message: types.Message):
     await bot.send_photo(message.chat.id, rasm, "Saqlash muddati 20 kun.\n"
                                                 "Tarkibi: Qatiq, shakar, o'simlik moyi,\n"
                                                 "Osh sodasi, vanilin, un", reply_markup=kb.keyboards_product)
+
 
 @dp.message_handler(regexp="Kakaoli Oddiy")
 async def process_im(message: types.Message):
@@ -163,7 +163,7 @@ async def callback_peoduct_handler(callback: types.CallbackQuery, state=FSMConte
 
 @dp.message_handler(state=Order.product_kilo)
 async def order_process(message: types.Message, state=FSMContext):
-    if message.text == '0.5' or '3' or '5k':
+    if message.text == '3kg' or '5kg' or '10kg':
         async with state.proxy() as data:
             data['product_kilo'] = message.text
             data['telegram_id'] = message.from_user.id
@@ -300,5 +300,3 @@ async def all_users(message: types.Message):
                                                 f"Soni: {user[5]}\n"
                                                 f"TelegramID: {user[6]}\n"
                                                 f"Username: {user[7]}")
-
-

@@ -6,8 +6,9 @@ import sqlite3
 from os.path import exists as path_exists
 from typing import List
 
-sqlite = 'app/database/db.sqlite3'
-# sqlite = 'db.sqlite3'
+sqlite = 'app/database/sqlite.db'
+# sqlite = 'sqlite.db'
+
 while not path_exists(sqlite):
     print(datetime.now(), "=> SQLite file is not found")
     time.sleep(1)
